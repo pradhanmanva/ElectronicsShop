@@ -1,6 +1,3 @@
-import com.sun.javafx.binding.StringFormatter;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.Scanner;
 
 import static java.lang.System.exit;
@@ -45,6 +42,10 @@ public class ElectronicsShop {
                 //System.out.print(m[i]+" ");
             }
 
+            boolean status = checkConstraints(s, n, m);
+            if (!status) {
+                exit(600);
+            }
             //working on the problem
             int amt = -1;
             for (int i = 0; i < n.length; i++) {
@@ -52,13 +53,36 @@ public class ElectronicsShop {
                     if (n[i] + m[j] <= s) {
                         amt = n[i] + m[j];
                         continue;
-                    }
-                    else break;
+                    } else break;
                 }
             }
             System.out.print(amt);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static boolean checkConstraints(int s, int[] n, int[] m) {
+        boolean result = true;
+        if (n.length > 1000 || n.length < 1) {
+            result = false;
+        }
+        if (m.length > 1000 || m.length < 1) {
+            result = false;
+        }
+        if (s < 1 || s > 1000000) {
+            result = false;
+        }
+        for (int aN : m) {
+            if (aN < 1 || aN > 1000000) {
+                result = false;
+            }
+        }
+        for (int aN : n) {
+            if (aN < 1 || aN > 1000000) {
+                result = false;
+            }
+        }
+        return result;
     }
 }
