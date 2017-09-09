@@ -46,17 +46,20 @@ public class ElectronicsShop {
             if (!status) {
                 exit(600);
             }
+
             //working on the problem
-            int amt = -1;
-            for (int i = 0; i < n.length; i++) {
-                for (int j = 0; j < m.length; j++) {
-                    if (n[i] + m[j] <= s) {
-                        amt = n[i] + m[j];
-                        continue;
-                    } else break;
+            int temp = Integer.MIN_VALUE;
+            for (int i : n) {
+                for (int j : m) {
+                    if (i + j > s)
+                        break;
+                    if (i + j > temp)
+                        temp = i + j;
+
                 }
             }
-            System.out.print(amt);
+
+            System.out.print(temp);
         } catch (Exception e) {
             e.printStackTrace();
         }
